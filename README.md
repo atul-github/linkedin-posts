@@ -64,6 +64,7 @@ USE_PG=1
 ```
 Please run **pg.sql** to create two tables.
 
+
 ## Running d3js
 To visualize connections using a D3.js application, follow these steps:
 
@@ -79,7 +80,14 @@ and browse to http://localhost:8003
 
 ![alt text](image-1.png)
 
+# Using App
 
+* When launched for the first time, you will be prompted to upload .jsonl file
+* It may take couple of minutes to upload the file :(
+* You can search linkedin members. So if you type 'a', around 100 linkedin members will be populated in dropdown beneath. You will need to click outside of text box for search to start.
+* Click 'Submit' - This will give you information if there is direct relation.
+* Click Connectedness - It will give directed path between two memebers if available.
+* Execute LLM - will do classification
 
 # Other experiments
 
