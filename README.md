@@ -13,18 +13,20 @@ $ sudo apt install python3.11-venv
 ```
 
 ## Project install
-proxy is required only when you are doing pip install behind corp firewall
 
 ```sh
 $ git clone https://github.com/atul-github/linkedin-posts poc
 $ cd poc
 $ python3 -m venv myenv
 $ source myenv/bin/activate
-$ pip install --proxy=http://localhost:3128 -r requirements.txt
+```
 
-## only require if you are running behind firewall
-$ export http_proxy=http://localhost:3128  
-$ export https_proxy=http://localhost:3128 
+When you are installing dependencies, please install individually. 
+
+
+```
+$ pip install pyvis beautifulsoup4 python-dotenv aiohttp networkx pandas streamlit psycopg2 numpy
+
 ```
 
 # Environment Variables
@@ -38,7 +40,7 @@ API_KEY=<your key>
 OLLAMA_URL=http://localhost:11434/api/generate
 OLLAMA_MODEL=llama3.1:latest
 ```
-If OLLAMA has higher preference. 
+If OLLAMA_URL is mentioned, application will use OLLAMA else it will fall back on GPT.
 
 # Running streamlit application
 
@@ -55,6 +57,7 @@ Add following in your environment variables or .env file
 ```
 USE_PG=1
 ```
+and run **pg.sql** to create two tables.
 
 ## Running d3js
 You can see connections using d3js application as well.
@@ -71,6 +74,8 @@ and browse to http://localhost:8003
 
 
 # Other experiments
+
+Note that I had to download many add-ins separately because of network issues.
 
 ## Setiment analysis using spacytextblob
 
