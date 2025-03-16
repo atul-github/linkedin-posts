@@ -1,10 +1,12 @@
 # Introduction
 
-This application can upload .jsonl file which consists of linkedin posts. It creates nodes for linkedin members and edges connecting nodes. It provides simple streamlit UI to play with.
+This application allows you to upload a .jsonl file containing LinkedIn posts. It creates nodes for LinkedIn members and edges to connect them. A simple Streamlit UI is provided to interact with the application.
 
 # Install
 
+
 ## Python install
+First, install the required Python version and dependencies:
 
 ```sh
 $ sudo apt install python3
@@ -13,6 +15,7 @@ $ sudo apt install python3.11-venv
 ```
 
 ## Project install
+Clone the repository and set up a virtual environment:
 
 ```sh
 $ git clone https://github.com/atul-github/linkedin-posts poc
@@ -21,24 +24,24 @@ $ python3 -m venv myenv
 $ source myenv/bin/activate
 ```
 
-When you are installing dependencies, please install individually. 
-
+Next, install the project dependencies:
 
 ```
 $ pip install pyvis beautifulsoup4 python-dotenv aiohttp networkx pandas streamlit psycopg2 numpy
 
 ```
+Please donot use requirements.txt as it may take very long time.
+
 
 # Environment Variables
-
-Create .env file or add these variables. 
+Create a .env file or add the following environment variables:
 
 ```
 OLLAMA_URL=http://localhost:11434/api/generate
 OLLAMA_MODEL=llama3.1:latest
 ```
-If OLLAMA_URL is mentioned, application will use OLLAMA else it will fall back on GPT.
-If you have GPT 4 access then 
+If OLLAMA_URL is set, the application will use OLLAMA. Otherwise, it will default to GPT. 
+If you have access to GPT-4, set the following:
 ```
 URL=https://<your url>/openai/deployments/<your deployment>/chat/completions?api-version=2024-02-15-preview
 API_KEY=<your key>
@@ -54,17 +57,20 @@ $ python -m streamlit  run main.py --server.port=8002 --server.address=localhost
 
 ## Run (with postgres)
 
-Add following in your environment variables or .env file
+To run with PostgreSQL, add the following to your environment variables or .env file:
 
 ```
 USE_PG=1
 ```
-and run **pg.sql** to create two tables.
+Please run **pg.sql** to create two tables.
 
 ## Running d3js
-You can see connections using d3js application as well.
-Once streamlit application is up and running, you need to upload .jsonl file. Once file is uploaded successfully, you can run python httpserver
+To visualize connections using a D3.js application, follow these steps:
 
+Start the Streamlit application and upload the .jsonl file.
+    Once the file is successfully uploaded, run the Python HTTP server:
+
+    
 ```sh
 $ python -m http.server 8003
 ```
@@ -118,24 +124,37 @@ python titles_model.py
 
 ## Using LLM
 
-**Pros**: Very accurate and limited to quality of prompt and token sizes.
-**Cons**: Expensive and cannot prepopulate 'closeness' rank
+**Pros**: 
+Very accurate and limited to quality of prompt and token sizes.
+Dependent on the quality of the prompt and token sizes.
+
+**Cons**: 
+Expensive
+Cannot prepopulate the 'closeness' rank.
+
 
 ## Training Model
-* Create a dataset for linkedin post and rank it based on closeness
-* Train model based on quality and quantiy of data (Fine-tune with RoBERTa, of using Transformer based model or simple TF-IDF Logistic Regression)
-* Supply text from post to get 'closeness' rank that would classify relation between two people, for example Poster and Commenter
-* I have attempted that with simple titles_model that would rank title.
+* Create a dataset of LinkedIn posts and rank them based on "closeness".
+* Train a model using the data (fine-tune with RoBERTa or use a Transformer-based model or simple TF-IDF Logistic Regression).
+* Supply text from posts to get a 'closeness' rank, which classifies the relationship between two people (e.g., Poster and Commenter).
+* I attempted this with a simple title model to rank titles.
 
-**Pros** : Can train model with good amount of data / not expensive
-**Cons** : Difficult to implement. Need to build dataset. Requires expertise. 
+**Pros** : 
+Can train model large dataset
+
+**Cons** : 
+* Need to create good quality dataset.
+* Requires expertise. 
 
 ## Sentiment analysis
 
 * Sentiment analysis using readymade models can give you decent results in terms of +ve or -ve tone
 
-**Pros** : Easy to use.
-**Cons** : Not accurate and cannot classify relation between two members
+**Pros** : 
+Easy to use.
+
+**Cons** : 
+Not accurate and cannot classify relation between two members
 
 
 
