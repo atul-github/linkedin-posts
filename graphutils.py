@@ -5,7 +5,7 @@ import networkx as nx
 from collections import Counter
 from bs4 import MarkupResemblesLocatorWarning
 import warnings
-from titles_model import get_title_model
+# from titles_model import get_title_model
 import os
 # from pgutils import cleanup, create_post_in_db, set_post_id, retrieve_common_post
 # from pandasutils import cleanup, create_post_in_db, set_post_id, retrieve_common_post
@@ -86,7 +86,7 @@ def add_edge(G, m1, m2, weight, relation, m1_name=None, m1_title=None, m2_name=N
         G.nodes[m1]["name"] = m1_name
       if ( m1_title != None and len(m1_title) > 0):
         G.nodes[m1]["title"] = m1_title            
-        title_rank_model = get_title_model()
+        # title_rank_model = ()
         # rank = title_rank_model.predict([m1_title])[0]
         # G.edges[m1, m2]["title_rank"] = int(rank)
       if ( m2_name != None and len(m2_name) > 0):
