@@ -34,13 +34,15 @@ $ pip install pyvis beautifulsoup4 python-dotenv aiohttp networkx pandas streaml
 Create .env file or add these variables. 
 
 ```
-URL=https://<your url>/openai/deployments/<your deployment>/chat/completions?api-version=2024-02-15-preview
-API_KEY=<your key>
-
 OLLAMA_URL=http://localhost:11434/api/generate
 OLLAMA_MODEL=llama3.1:latest
 ```
 If OLLAMA_URL is mentioned, application will use OLLAMA else it will fall back on GPT.
+If you have GPT 4 access then 
+```
+URL=https://<your url>/openai/deployments/<your deployment>/chat/completions?api-version=2024-02-15-preview
+API_KEY=<your key>
+```
 
 # Running streamlit application
 
@@ -104,3 +106,54 @@ python benepar_test.py
 pip install scikit-learn
 python titles_model.py
 ```
+
+# Approach
+
+* Upload .jsonl file
+* Read each json object line by line
+* Using **networkx** create nodes and edges . This is Directed graph.
+* Create a node for every person who has posted, who has shared and who has commented on post.
+* Create edges from commenter to poster, resharere to poster and then to mentions. So if commenter has mentioned someone, then edge will be created from commenter to mention.
+* Weight is being calculated and 'mutual' relation is also calculated. This will be used while finding path between two nodes. This is used for only for display . I will work on it when I get chance or is required.
+
+## Using LLM
+
+**Pros**: Very accurate and limited to quality of prompt and token sizes.
+**Cons**: Expensive and cannot prepopulate 'closeness' rank
+
+## Training Model
+* Create a dataset for linkedin post and rank it based on closeness
+* Train model based on quality and quantiy of data (Fine-tune with RoBERTa, of using Transformer based model or simple TF-IDF Logistic Regression)
+* Supply text from post to get 'closeness' rank that would classify relation between two people, for example Poster and Commenter
+* I have attempted that with simple titles_model that would rank title.
+
+**Pros** : Can train model with good amount of data / not expensive
+**Cons** : Difficult to implement. Need to build dataset. Requires expertise. 
+
+## Sentiment analysis
+
+* Sentiment analysis using readymade models can give you decent results in terms of +ve or -ve tone
+
+**Pros** : Easy to use.
+**Cons** : Not accurate and cannot classify relation between two members
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
