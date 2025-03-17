@@ -59,11 +59,11 @@ def relation_message(node1, node2):
       if ( G.edges[node1, node2]['commented'] > 0):
         s = f"<b>{G.nodes[node1]['name']}</b> has <b>commented</b> on {G.nodes[node2]['name']}</b>'s posts {G.edges[node1, node2]['commented']} time(s)"
       if ( G.edges[node1, node2]['mentioned'] > 0):
-        s = f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>mentioned</b> {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['mentioned']} time(s)"
+        s += f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>mentioned</b> {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['mentioned']} time(s)"
       if ( G.edges[node1, node2]['co-commented'] > 0):
-        s = f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>co-commented</b> with {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['co-commented']} time(s)"
+        s += f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>co-commented</b> with {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['co-commented']} time(s)"
       if ( G.edges[node1, node2]['shared'] > 0):
-        s = f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>reshared</b> {G.nodes[node2]['name']}</b> post(s) {G.edges[node1, node2]['shared']} time(s)"
+        s += f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>reshared</b> {G.nodes[node2]['name']}</b> post(s) {G.edges[node1, node2]['shared']} time(s)"
       return s
   else:
     return (f"There is no direction connection between <b>{G.nodes[node1]['name']}</b> and <b>{G.nodes[node2]['name']}</b>")
@@ -108,6 +108,11 @@ def find_relationship():
         r_msg1 = relation_message(node1, node2)
         r_msg2 = relation_message(node2, node1)
         r_msg = r_msg1 + "<br />" + r_msg2
+        if(G.has_edge(node1, node2) and G.has_edge(node2, node1)):
+            if ( G.edges[node1, node2]['mutual'] > 0 ):
+                r_msg += f"<br />They have <b>Mutual</b> relation. That means they are familiar with each other."
+            else:
+                r_msg += f"<br />They have commented on same posts. They are not familiar with each other<br />"
         if(not G.has_edge(node1, node2) and not G.has_edge(node2, node1)):
           exchange = get_common_posts(node1, node2)
           post_items = []
@@ -365,3 +370,4 @@ if __name__ == "__main__":
     # st.session_state.posts = posts
     pass
   start_streamlit()
+    
