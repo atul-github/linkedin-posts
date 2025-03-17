@@ -76,7 +76,7 @@ Start the Streamlit application and upload the .jsonl file.
 $ python -m http.server 8003
 ```
 
-and browse to http://localhost:8003 
+and browse to http://localhost:8003/d3.html 
 
 ![alt text](image-1.png)
 
@@ -129,6 +129,7 @@ python titles_model.py
 * Create a node for every person who has posted, who has shared and who has commented on post.
 * Create edges from commenter to poster, resharere to poster and then to mentions. So if commenter has mentioned someone, then edge will be created from commenter to mention.
 * Weight is being calculated and 'mutual' relation is also calculated. This will be used while finding path between two nodes. This is used for only for display . I will work on it when I get chance or is required.
+* For **weight calculation** : few things i have implemented like weight is higher for 'mutual' relation. It should consider with whom you are connected. I will enhance this part little bit further
 
 ## Using LLM
 
