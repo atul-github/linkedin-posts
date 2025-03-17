@@ -95,7 +95,7 @@ def add_edge(G, m1, m2, weight, relation, m1_name=None, m1_title=None, m2_name=N
         G.nodes[m2]["title"] = m2_title
 
     if (G.has_edge(m2, m1)):
-      if(G.edges[m2,m1]["mentioned"] > 0 and  G.edges[m2,m1]["commented"] > 0 and G.edges[m2,m1]["shared"] > 0):
+      if(G.edges[m2,m1]["mentioned"] > 0 or G.edges[m2,m1]["commented"] > 0 or G.edges[m2,m1]["shared"] > 0):
         if ( G.edges[m2, m1]['mutual'] == 0):
           G.edges[m2, m1]['mutual'] = 1
           w = G.edges[m2, m1]['weight']
@@ -222,3 +222,4 @@ def initialize(upload_file):
   print("Number of nodes:", G.number_of_nodes())
   print("Number of edges:", G.number_of_edges())
   return G, posts
+   
