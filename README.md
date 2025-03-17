@@ -58,6 +58,7 @@ python -m streamlit  run main.py --server.port=8002 --server.address=localhost -
 
 ## Run (with postgres)
 
+By default application doesn't use database. And keeps data in pandas dataframe. If you want to see data persisted, you can run app with postgresql.
 To run with PostgreSQL, add the following to your environment variables or .env file:
 
 ```
@@ -88,7 +89,8 @@ and browse to http://localhost:8003/d3.html
 * You can search linkedin members. So if you type 'a', around 100 linkedin members will be populated in dropdown beneath. You will need to click outside of text box for search to start.
 * Click 'Submit' - This will give you information if there is direct relation.
 * Click Connectedness - It will give directed path between two memebers if available.
-* Execute LLM - will do classification
+* Execute LLM - will do classification. You will need to have access to GPT4 or  OLLAMA
+* Refresh the page to upload another file
 
 # Other experiments
 
@@ -126,13 +128,28 @@ python titles_model.py
 
 * Upload .jsonl file
 * Read each json object line by line
-* Using **networkx** create nodes and edges . This is Directed graph.
+* Using **networkx** create nodes and edges . This is Directed graph. I could have used **neo4j** but in this particular scenario, in-memory networkx was sufficient.
 * Create a node for every person who has posted, who has shared and who has commented on post.
 * Create edges from commenter to poster, resharere to poster and then to mentions. So if commenter has mentioned someone, then edge will be created from commenter to mention.
 * Weight is being calculated and 'mutual' relation is also calculated. This will be used while finding path between two nodes. This is used for only for display . I will work on it when I get chance or is required.
 * For **weight calculation** : few things i have implemented like weight is higher for 'mutual' relation. It should consider with whom you are connected. I will enhance this part little bit further
 
+## Without using AI/ML technique
+* This is completely mathematical analysis where every interaction counts are maintained
+
+**Pros**:
+Quick to implement
+Can be used for quick analysis. For example how frequently two members are communicating with each other.
+Can also know 'Familiar with each other'
+
+
+**Cons**:
+We will not really know if they are close colleague/friends. 
+
+
 ## Using LLM
+
+It is a shortcut to actual problem statement.
 
 **Pros**: 
 Very accurate and limited to quality of prompt and token sizes.
@@ -143,11 +160,13 @@ Expensive
 Cannot prepopulate the 'closeness' rank.
 
 
+
 ## Training Model
 * Create a dataset of LinkedIn posts and rank them based on "closeness".
 * Train a model using the data (fine-tune with RoBERTa or use a Transformer-based model or simple TF-IDF Logistic Regression).
 * Supply text from posts to get a 'closeness' rank, which classifies the relationship between two people (e.g., Poster and Commenter).
 * I attempted this with a simple title model to rank titles.
+* When I attemped with posts, results were not very good. **I need to learn** on how to train models.
 
 **Pros** : 
 Can train model large dataset
@@ -166,6 +185,9 @@ Easy to use.
 **Cons** : 
 Not accurate and cannot classify relation between two members
 
+# TODO
+
+Really understand / learn all NLP concepts and apply it properly for this problem.
 
 
 
