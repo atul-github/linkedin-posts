@@ -121,8 +121,8 @@ def find_relationship():
     if ("relation_message" in st.session_state and len(st.session_state.relation_message) > 0 ):
       st.write(st.session_state.relation_message, unsafe_allow_html=True)
   with col2:
-    st.write("Click on Connectedness to check if Path exists")
-    if st.button("Connectedness"):
+    st.write("Click on Path to check if selected members are connected")
+    if st.button("Connection Path"):
       if ( "selected_node1" in st.session_state and "selected_node2" in st.session_state ):
         node1 = st.session_state.selected_node1[1]
         node2 = st.session_state.selected_node2[1]
