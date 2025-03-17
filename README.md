@@ -9,25 +9,25 @@ This application allows you to upload a .jsonl file containing LinkedIn posts. I
 First, install the required Python version and dependencies:
 
 ```sh
-$ sudo apt install python3
-$ sudo apt install python3-pip
-$ sudo apt install python3.11-venv
+sudo apt install python3
+sudo apt install python3-pip
+sudo apt install python3.11-venv
 ```
 
 ## Project install
 Clone the repository and set up a virtual environment:
 
 ```sh
-$ git clone https://github.com/atul-github/linkedin-posts poc
-$ cd poc
-$ python3 -m venv myenv
-$ source myenv/bin/activate
+git clone https://github.com/atul-github/linkedin-posts poc
+cd poc
+python3 -m venv myenv
+source myenv/bin/activate
 ```
 
 Next, install the project dependencies:
 
 ```
-$ pip install pyvis beautifulsoup4 python-dotenv aiohttp networkx pandas streamlit psycopg2 numpy
+pip install pyvis beautifulsoup4 python-dotenv aiohttp networkx pandas streamlit psycopg2 numpy
 
 ```
 Please donot use requirements.txt as it may take very long time.
@@ -52,7 +52,7 @@ API_KEY=<your key>
 ## Run (without postgres)
 
 ```sh
-$ python -m streamlit  run main.py --server.port=8002 --server.address=localhost --server.maxUploadSize=900
+python -m streamlit  run main.py --server.port=8002 --server.address=localhost --server.maxUploadSize=900
 ```
 
 ## Run (with postgres)
@@ -73,7 +73,7 @@ Start the Streamlit application and upload the .jsonl file.
 
     
 ```sh
-$ python -m http.server 8003
+python -m http.server 8003
 ```
 
 and browse to http://localhost:8003/d3.html 
