@@ -59,11 +59,11 @@ def relation_message(node1, node2):
       if ( G.edges[node1, node2]['commented'] > 0):
         s = f"<b>{G.nodes[node1]['name']}</b> has <b>commented</b> on {G.nodes[node2]['name']}</b>'s posts {G.edges[node1, node2]['commented']} time(s)"
       if ( G.edges[node1, node2]['mentioned'] > 0):
-        s += f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>mentioned</b> {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['mentioned']} time(s)"
+        s = f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>mentioned</b> {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['mentioned']} time(s)"
       if ( G.edges[node1, node2]['co-commented'] > 0):
-        s += f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>co-commented</b> with {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['co-commented']} time(s)"
+        s = f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>co-commented</b> with {G.nodes[node2]['name']}</b> {G.edges[node1, node2]['co-commented']} time(s)"
       if ( G.edges[node1, node2]['shared'] > 0):
-        s += f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>reshared</b> {G.nodes[node2]['name']}</b> post(s) {G.edges[node1, node2]['shared']} time(s)"
+        s = f"{s}<br /><b>{G.nodes[node1]['name']}</b> has <b>reshared</b> {G.nodes[node2]['name']}</b> post(s) {G.edges[node1, node2]['shared']} time(s)"
       return s
   else:
     return (f"There is no direction connection between <b>{G.nodes[node1]['name']}</b> and <b>{G.nodes[node2]['name']}</b>")
