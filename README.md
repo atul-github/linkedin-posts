@@ -158,7 +158,7 @@ Can train model large dataset
 
 ## Sentiment analysis
 
-* Sentiment analysis using readymade models can give you decent results in terms of +ve or -ve tone
+* Sentiment analysis using readymade models can give you decent results in terms of +ve or -ve tone. Sentiment value along with data, we can find out relative closeness between two members.
 
 **Pros** : 
 Easy to use.
