@@ -27,6 +27,7 @@ source myenv/bin/activate
 Next, install the project dependencies:
 
 ```
+sudo apt-get install libpq-dev python3.11-dev
 pip install pyvis beautifulsoup4 python-dotenv aiohttp networkx pandas streamlit psycopg2 numpy
 
 ```
