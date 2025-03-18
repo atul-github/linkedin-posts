@@ -16,7 +16,7 @@ def prepare_request(prompt):
     payload = {
         "model" : os.environ["OLLAMA_MODEL"],
         "stream": False,
-        "prompt" : prompt,
+        "prompt" : "You are an AI assistant who is an expert in analyzing contents of Linkedin posts to find out connectedness among people when they endorse each other or when they have established professional relationships.\n\n" + prompt,
           "options": {
             "temperature": 0.7
         }
