@@ -1,6 +1,7 @@
-# Introduction
+# LinkedIn Post Analysis
 
-This application allows you to upload a .jsonl file containing LinkedIn posts. It creates nodes for LinkedIn members and edges to connect them. A simple Streamlit UI is provided to interact with the application.
+This application allows you to upload a .jsonl file containing LinkedIn posts and then it generates a graph of connections between LinkedIn members. Nodes represent individuals/companies, and edges connect them based on interactions such as posting, commenting, and resharing. A simple Streamlit UI is provided to interact with the application and visualize connections.
+
 
 # Install
 
@@ -85,11 +86,11 @@ and browse to http://localhost:8003/d3.html
 # Using App
 
 * When launched for the first time, you will be prompted to upload .jsonl file
-* It may take couple of minutes to upload the file :(
-* You can search linkedin members. So if you type 'a', around 100 linkedin members will be populated in dropdown beneath. You will need to click outside of text box for search to start.
-* Click 'Submit' - This will give you information if there is direct relation.
-* Click Connectedness - It will give directed path between two memebers if available.
-* Execute LLM - will do classification. You will need to have access to GPT4 or  OLLAMA
+* File uploads may take a few minutes, depending on size. :(
+* YYou can search LinkedIn members by typing in the search box (e.g., typing 'a' will populate around 100 LinkedIn members - name starts with 'a' or 'A' in the dropdown). Click outside the text box to trigger the search.
+* Click Submit button to check for direct relationships between members.
+* Click Connectedness - It will give directed path between two memebers if exists.
+* Execute LLM - Classifies the relationship between members. You will need access to GPT-4 or OLLAMA for this feature.
 * Refresh the page to upload another file
 
 # Other experiments
@@ -126,69 +127,66 @@ python titles_model.py
 
 # Approach
 
-* Upload .jsonl file
-* Read each json object line by line
-* Using **networkx** create nodes and edges . This is Directed graph. I could have used **neo4j** but in this particular scenario, in-memory networkx was sufficient.
-* Create a node for every person who has posted, who has shared and who has commented on post.
-* Create edges from commenter to poster, resharere to poster and then to mentions. So if commenter has mentioned someone, then edge will be created from commenter to mention.
-* Weight is being calculated and 'mutual' relation is also calculated. This will be used while finding path between two nodes. This is used for only for display . I will work on it when I get chance or is required.
-* For **weight calculation** : few things i have implemented like weight is higher for 'mutual' relation. It should consider with whom you are connected. I will enhance this part little bit further
+* Upload .jsonl file and read each JSON object line by line.
+* Use NetworkX to create nodes (individuals) and edges (connections) for the directed graph. I opted for NetworkX in-memory due to its simplicity, though **Neo4j** could be used for larger datasets.
+* Create a node for every person who has posted, who has shared, who has commented on post or was mentioned by others.
+* Create edges from commenter to poster, resharere to poster and then to mentions. 
+* Weight Calculation: Edge weights are calculated based on the type of interaction (e.g., mutual relationships are given higher weight while edges with co-commenter are having lower weight )
+* Weight is also used while finding path between two members when
 
 ## Without using AI/ML technique
-* This is completely mathematical analysis where every interaction counts are maintained
+* This method relies solely on mathematical analysis, counting interactions between members.
 
 **Pros**:
 Quick to implement
-Can be used for quick analysis. For example how frequently two members are communicating with each other.
-Can also know 'Familiar with each other'
-
+Useful for basic analysis, such as frequency of communication or familiarity
 
 **Cons**:
-We will not really know if they are close colleague/friends. 
+Limited in understanding deeper relationships (e.g., whether they are close colleagues or casual acquaintances)
 
 
-## Using LLM
-
-It is a shortcut to actual problem statement.
+## Using LLM(e.g., GPT-4 or OLLAMA)
 
 **Pros**: 
-Very accurate and limited to quality of prompt and token sizes.
-Dependent on the quality of the prompt and token sizes.
+More accurate relationship classification
+Easy to implement and adapt with better prompts
 
 **Cons**: 
-'Expensive' - $2.5 / 1M token cannot be called expensive though. This is GPT4o pricing. If we do smart batch processing, cost will be less and you can easily get nice output for millions of post,. 
-As per my discussion, I found that processing around 100k posts would take around 1/2 hour. Now we can calculate on how much time it will take to finish our task. 
-
+'Cost' - Although $2.5 / 1M token cannot be called expensive. This is GPT4o pricing. If we do smart batch processing, cost will be less and we  can easily get nice output for millions of post,. 
+As per my discussion, I found that processing around 100k posts would take around 1/2 hour. With this, we can calculate on how much time it will take to finish our task. 
 
 
 
 ## Training Model
+
 * Create a dataset of LinkedIn posts and rank them based on "closeness".
 * Train a model using the data (fine-tune with RoBERTa or use a Transformer-based model or simple TF-IDF Logistic Regression).
 * Supply text from posts to get a 'closeness' rank, which classifies the relationship between two people (e.g., Poster and Commenter).
-* I attempted this with a simple title model to rank titles.
+* I attempted this with a sample posts to rank closeness/friendlyness of two members. Couldn't get good results.
+* I have also attempted to create ranking based on 'titles'. 
 * When I attemped with posts, results were not very good. **I need to learn** on how to train models.
 
 **Pros** : 
-Can train model large dataset
+Can train model with large dataset and fine tune based on needs. Customizable to specific needs
 
 **Cons** : 
-* Need to create good quality dataset.
-* Requires expertise. 
+* Requires high-quality training data
+* Requires expertise and many iterations to train the model
 
 ## Sentiment analysis
-
-* Sentiment analysis using readymade models can give you decent results in terms of +ve or -ve tone. Sentiment value along with data, we can find out relative closeness between two members.
+Sentiment analysis using pre-trained models can offer insight into the tone of interactions, providing another layer of relationship context.
+Sentiment value along with data, we can find out relative closeness between two members.
 
 **Pros** : 
-Easy to use.
+Easy to use.  We can use keywords like 'worked with', 'good mentor', 'had lunch', 'went on trip' etc to improve accuracy. Outcome might be better if used along with well trained model.
 
 **Cons** : 
-Not accurate and cannot classify relation between two members
+Not accurate and cannot classify relation between two members.
 
 # TODO
 
-Really understand / learn all NLP concepts and apply it properly for this problem.
+Really understand / learn all NLP concepts and apply it properly for this problem. But question is - is it really required?
+With LLM, we can have post with several members interacting with each other. LLM precisely finds out who is saying what about other. 
 
 
 
