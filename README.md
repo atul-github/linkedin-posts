@@ -156,8 +156,9 @@ Very accurate and limited to quality of prompt and token sizes.
 Dependent on the quality of the prompt and token sizes.
 
 **Cons**: 
-Expensive
-Cannot prepopulate the 'closeness' rank.
+'Expensive' - $2.5 / 1M token cannot be called expensive though. This is GPT4o pricing. If we do smart batch processing, cost will be less and you can easily get nice output for millions of post,. 
+As per my discussion, I found that processing around 100k posts would take around 1/2 hour. Now we can calculate on how much time it will take to finish our task. 
+
 
 
 
