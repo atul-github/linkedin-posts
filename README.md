@@ -134,7 +134,7 @@ python titles_model.py
 * Weight Calculation: Edge weights are calculated based on the type of interaction (e.g., mutual relationships are given higher weight while edges with co-commenter are having lower weight )
 * Weight is also used while finding path between two members when
 
-## Without using AI/ML technique
+## 1. Without using AI/ML technique
 * This method relies solely on mathematical analysis, counting interactions between members.
 
 **Pros**:
@@ -145,7 +145,7 @@ Useful for basic analysis, such as frequency of communication or familiarity
 Limited in understanding deeper relationships (e.g., whether they are close colleagues or casual acquaintances)
 
 
-## Using LLM(e.g., GPT-4 or OLLAMA)
+## 2. Using LLM(e.g., GPT-4 or OLLAMA)
 
 **Pros**: 
 More accurate relationship classification
@@ -155,9 +155,7 @@ Easy to implement and adapt with better prompts
 'Cost' - Although $2.5 / 1M token cannot be called expensive. This is GPT4o pricing. If we do smart batch processing, cost will be less and we  can easily get nice output for millions of post,. 
 As per my discussion, I found that processing around 100k posts would take around 1/2 hour. With this, we can calculate on how much time it will take to finish our task. 
 
-
-
-## Training Model
+## 3. Training Model
 
 * Create a dataset of LinkedIn posts and rank them based on "closeness".
 * Train a model using the data (fine-tune with RoBERTa or use a Transformer-based model or simple TF-IDF Logistic Regression).
@@ -173,7 +171,7 @@ Can train model with large dataset and fine tune based on needs. Customizable to
 * Requires high-quality training data
 * Requires expertise and many iterations to train the model
 
-## Sentiment analysis
+## 4. Sentiment analysis
 Sentiment analysis using pre-trained models can offer insight into the tone of interactions, providing another layer of relationship context.
 Sentiment value along with data, we can find out relative closeness between two members.
 
@@ -181,7 +179,7 @@ Sentiment value along with data, we can find out relative closeness between two 
 Easy to use.  We can use keywords like 'worked with', 'good mentor', 'had lunch', 'went on trip' etc to improve accuracy. Outcome might be better if used along with well trained model.
 
 **Cons** : 
-Same as for training model. 
+Same as for training model. Just by having sentiment analysis won't have good results.
 
 
 # TODO
