@@ -181,7 +181,8 @@ Sentiment value along with data, we can find out relative closeness between two 
 Easy to use.  We can use keywords like 'worked with', 'good mentor', 'had lunch', 'went on trip' etc to improve accuracy. Outcome might be better if used along with well trained model.
 
 **Cons** : 
-Not accurate and cannot classify relation between two members.
+Same as for training model. 
+
 
 # TODO
 
