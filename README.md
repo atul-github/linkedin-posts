@@ -147,6 +147,8 @@ Limited in understanding deeper relationships (e.g., whether they are close coll
 
 ## 2. Using LLM(e.g., GPT-4 or OLLAMA)
 
+This approach is used in current implementation along with previous methos.
+
 **Pros**: 
 More accurate relationship classification
 Easy to implement and adapt with better prompts
