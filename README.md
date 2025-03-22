@@ -175,6 +175,8 @@ Can train model with large dataset and fine tune based on needs. Customizable to
 Sentiment analysis using pre-trained models can offer insight into the tone of interactions, providing another layer of relationship context.
 Sentiment value along with data, we can find out relative closeness between two members.
 
+There is very nice [https://language.googleapis.com/v1/documents:analyzeEntitySentiment](Entity and Sentiment Analysis with the Natural Language API) that gives you every mention and sentiment. 
+
 **Pros** : 
 Easy to use.  We can use keywords like 'worked with', 'good mentor', 'had lunch', 'went on trip' etc to improve accuracy. Outcome might be better if used along with well trained model.
 
