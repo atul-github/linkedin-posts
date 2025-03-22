@@ -65,14 +65,19 @@ To run with PostgreSQL, add the following to your environment variables or .env 
 ```
 USE_PG=1
 ```
-Please run **pg.sql** to create two tables.
+Please run **pg.sql** to create two tables in postgresql database. Please note that code is using 'mydb' with public schema. Change **pgutils.py** if you have different postgres connection parameters.
+
+```sh
+python -m streamlit  run main.py --server.port=8002 --server.address=localhost --server.maxUploadSize=900
+```
+
 
 
 ## Running d3js
 To visualize connections using a D3.js application, follow these steps:
 
 Start the Streamlit application and upload the .jsonl file.
-    Once the file is successfully uploaded, run the Python HTTP server:
+    Once the file is successfully uploaded, run the Python HTTP server on different terminal:
 
     
 ```sh
